@@ -25,9 +25,12 @@ CREATE TABLE IF NOT EXISTS `products`
 
 CREATE TABLE IF NOT EXISTS `promo_codes`
     (
-        `discount` INT(11) NOT NULL DEFAULT '10',
+        `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `discount` INT(11) UNSIGNED NOT NULL DEFAULT '10',
         `code` VARCHAR(50) NOT NULL DEFAULT 'free10' COLLATE 'utf8mb4_general_ci',
-        `time` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+        `time` TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        PRIMARY KEY (`id`) USING BTREE,
+        INDEX `id` (`id`) USING BTREE
     )
 ```
 
