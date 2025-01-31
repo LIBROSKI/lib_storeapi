@@ -8,24 +8,27 @@
 -- HeidiSQL Wersja:              12.5.0.6677
 -- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `label` varchar(50) NOT NULL DEFAULT 'product',
-  `price` float unsigned NOT NULL DEFAULT 0,
-  `description` varchar(50) NOT NULL DEFAULT 'short desc',
-  `tags` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`tags`)),
-  `imgs` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '"{}"',
-  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `products`
+    (
+        `id`    INT(10) UNSIGNED NOT NULL auto_increment,
+        `label` VARCHAR(50) NOT NULL DEFAULT 'product',
+        `price` FLOAT UNSIGNED NOT NULL DEFAULT 0,
+        `description` VARCHAR(50) NOT NULL DEFAULT 'short desc',
+        `tags` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL check (json_valid(`tags`)),
+        `imgs` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '"{}"',
+        `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP() ON
+    UPDATE CURRENT_TIMESTAMP(),
+    PRIMARY KEY (`id`),
+    KEY `id` (`id`)
+    )engine=innodb DEFAULT charset=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `promo_codes` (
-  `discount` int(11) NOT NULL DEFAULT 10,
-  `code` varchar(50) NOT NULL DEFAULT 'free10',
-  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+CREATE TABLE IF NOT EXISTS `promo_codes`
+    (
+        `discount` INT(11) NOT NULL DEFAULT 10,
+        `code`     VARCHAR(50) NOT NULL DEFAULT 'free10',
+        `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() on
+    UPDATE CURRENT_TIMESTAMP()
+    )engine=innodb DEFAULT charset=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
 ## Sample ENV file
