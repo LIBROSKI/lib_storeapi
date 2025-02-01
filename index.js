@@ -19,10 +19,40 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date() });
 });
 
-// Example endpoint to fetch data
-app.get('/api/data', async (req, res) => {
+// Getting data from database
+app.get('/api/getAllProducts', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM your_table LIMIT 10');
+        const [rows] = await db.query('SELECT * FROM products LIMIT 48');
+        res.json(rows);
+    } catch (error) {
+        console.error('Query error:', error);
+        res.status(500).json({ error: 'Database query failed' });
+    }
+});
+
+app.get('/api/getPromoAllCodes', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM promo_codes LIMIT 48');
+        res.json(rows);
+    } catch (error) {
+        console.error('Query error:', error);
+        res.status(500).json({ error: 'Database query failed' });
+    }
+});
+
+app.get('/api/getProduct', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM products WHERE product_id = ?', [req.query.product_id]);
+        res.json(rows);
+    } catch (error) {
+        console.error('Query error:', error);
+        res.status(500).json({ error: 'Database query failed' });
+    }
+});
+
+app.get('/api/getPromoCode', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM promo_codes WHERE promo_code = ?', [req.query.promo_code]);
         res.json(rows);
     } catch (error) {
         console.error('Query error:', error);
