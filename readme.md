@@ -45,7 +45,12 @@ DATABASE_PASSWORD=mysecretpwd
 DATABASE_NAME=myawsomeshop
 
 API_PORT=5055
+MYSQL_ROOT_PASSWORD=rootpassword
 ```
+
+## MySQL Root User Password Configuration
+
+To avoid the "Access denied for user 'root'@'localhost' (using password: NO)" error, you need to set the MySQL root user password in the GitHub Actions workflow. This can be done by adding a step to set the MySQL root user password and updating the MySQL commands to use the root user password.
 
 ## GitHub Actions Workflow
 
