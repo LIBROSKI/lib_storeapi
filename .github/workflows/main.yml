@@ -28,11 +28,6 @@ jobs:
     - name: Start MySQL service
       run: sudo service mysql start
 
-    - name: Set MySQL root user password
-      run: |
-        sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '${{ secrets.MYSQL_ROOT_PASSWORD }}';"
-        sudo mysql -e "FLUSH PRIVILEGES;"
-
     - name: Create test database and user
       run: |
         sudo mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS test_db;"
