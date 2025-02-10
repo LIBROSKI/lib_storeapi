@@ -22,5 +22,15 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Set up MySQL
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mysql-server
+        sudo service mysql start
+        mysql -e "CREATE DATABASE IF NOT EXISTS myawsomeshop;"
+        mysql -e "CREATE USER IF NOT EXISTS 'user123'@'localhost' IDENTIFIED BY 'mysecretpwd';"
+        mysql -e "GRANT ALL PRIVILEGES ON myawsomeshop.* TO 'user123'@'localhost';"
+        mysql -e "FLUSH PRIVILEGES;"
+
     - name: Run API
       run: npm start
