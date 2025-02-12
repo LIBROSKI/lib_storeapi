@@ -1,0 +1,46 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install MySQL server
+      run: sudo apt-get install mysql-server
+
+    - name: Start MySQL service
+      run: sudo service mysql start
+
+    - name: Create test database
+      run: |
+        sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS test_db;"
+        sudo mysql -u root -e "CREATE USER IF NOT EXISTS 'test_user'@'localhost' IDENTIFIED BY 'test_password';"
+
+    - name: Run API
+      run: npm start
+      env:
+        DATABASE_TYPE: mysql
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_PORT: 3306
+        DATABASE_USER: test_user
+        DATABASE_PASSWORD: test_password
+        DATABASE_NAME: test_db
+        API_PORT: 5055
+        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}

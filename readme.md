@@ -45,4 +45,20 @@ DATABASE_PASSWORD=mysecretpwd
 DATABASE_NAME=myawsomeshop
 
 API_PORT=5055
+MYSQL_ROOT_PASSWORD=rootpassword
 ```
+
+## MySQL Root User Password Configuration
+
+To avoid the "Access denied for user 'root'@'localhost' (using password: NO)" error, you need to set the MySQL root user password in the GitHub Actions workflow. This can be done by adding a step to set the MySQL root user password and updating the MySQL commands to use the root user password.
+
+## GitHub Actions Workflow
+
+The GitHub Actions workflow automates the hosting of the API. It sets up Node.js, installs dependencies, and runs the API.
+
+### Instructions
+
+1. Ensure your repository contains a `.github/workflows/main.yml` file with the necessary configuration.
+2. Push your changes to the repository.
+3. The workflow will automatically trigger on push and pull request events.
+4. Monitor the workflow progress in the Actions tab of your GitHub repository.
