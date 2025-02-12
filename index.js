@@ -19,6 +19,11 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date() });
 });
 
+// New ping endpoint
+app.get('/api/ping', (req, res) => {
+    res.json({ message: 'pong' });
+});
+
 // Getting data from database
 app.get('/api/getAllProducts', async (req, res) => {
     try {
